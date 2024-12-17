@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Decision Tool</title>
+</head>
+<body>
+    <h1>Chain Decision Tool</h1>
+    <form method="post" action="/decision">
+        <label for="weather">Weather (snow, ice, rain, clear):</label><br>
+        <input type="text" id="weather" name="weather" required><br><br>
+        <label for="road_condition">Road Condition (snowy, icy, wet, dry):</label><br>
+        <input type="text" id="road_condition" name="road_condition" required><br><br>
+        <label for="temperature">Temperature (Fahrenheit):</label><br>
+        <input type="number" id="temperature" name="temperature" required><br><br>
+        <button type="submit">Check</button>
+    </form>
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+    {% endif %}
+</body>
+</html>
