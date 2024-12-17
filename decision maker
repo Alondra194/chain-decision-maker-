@@ -1,0 +1,27 @@
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+def should_put_chains(weather, road_condition, temperature):
+    if road_condition in ['snowy', 'icy'] or weather in ['snow', 'ice']:
+        if temperature <= 32:
+            return "Chains are recommended for your safety."
+        else:
+            return "Chains are optional but can help with traction."
+    else:
+        return "Chains are not necessary."
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/decision', methods=['POST'])
+def decision():
+    weather = request.form['weather'].lower()
+    road_condition = request.form['road_condition'].lower()
+    temperature = int(request.form['temperature'])
+    result = should_put_chains(weather, road_condition, temperature)
+    return render_template('index.html', result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
